@@ -3,7 +3,6 @@ from nose.tools import eq_
 from rest_framework.test import APITestCase
 from rest_framework import status
 from ...users.test.factories import UserFactory
-from ..models import Organizer
 
 
 class TestOrganizerCreate(APITestCase):
@@ -20,5 +19,4 @@ class TestOrganizerCreate(APITestCase):
         response = self.client.post(self.url, {})
         eq_(response.status_code, status.HTTP_201_CREATED)
 
-        organizer = Organizer.objects.get(pk=response.data.get('user'))
         eq_(str(response.data.get('user')), self.user.id)
